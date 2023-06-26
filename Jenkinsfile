@@ -12,10 +12,11 @@ pipeline {
     
     parameters {
         booleanParam(description: 'Restarts the WikiJS Server even if there are no new changes', name: 'WikiJS', defaultValue:'false')
+        booleanParam(description: 'Restarts the local Spark Cluster even if there are no new changes', name: 'Spark', defaultValue:'false')
     }
 
     environment {
-        ENV_FILE = credentials('fairwiki-env')
+        ENV_FILE = credentials('spark-env')
     }
 
     stages {
@@ -32,6 +33,21 @@ pipeline {
                 anyOf {
                     expression { params.WikiJS }
                     changeset 'fairwiki/**'
+                }
+            } 
+            steps {
+                dir('fairwiki') {
+                    sh 'sudo docker compose stop'
+                    sh 'sudo docker compose --env-file $ENV_FILE up --pull always --force-recreate --detach'
+                }
+            }
+        }
+
+        stage('Spark') {
+            when { 
+                anyOf {
+                    expression { params.Spark }
+                    changeset 'spark/**'
                 }
             } 
             steps {

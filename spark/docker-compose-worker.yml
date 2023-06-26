@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  spark-worker:
+    image: bitnami/spark:latest
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_RPC_AUTHENTICATION_ENABLED=yes
+      - SPARK_RPC_AUTHENTICATION_SECRET=${SPARK_SECRET}
+      - SPARK_MASTER_URL=spark://spark.kaliburg.de/
+      - SPARK_WORKER_MEMORY=8G
+      - SPARK_WORKER_CORES=2
+      - SPARK_USER=spark
