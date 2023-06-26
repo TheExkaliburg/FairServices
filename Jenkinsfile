@@ -16,7 +16,8 @@ pipeline {
     }
 
     environment {
-        ENV_FILE = credentials('spark-env')
+        WIKI_ENV_FILE = credentials('fairwiki-env')
+        SPARK_ENV_FILE = credentials('spark-env')
     }
 
     stages {
@@ -38,7 +39,7 @@ pipeline {
             steps {
                 dir('fairwiki') {
                     sh 'sudo docker compose stop'
-                    sh 'sudo docker compose --env-file $ENV_FILE up --pull always --force-recreate --detach'
+                    sh 'sudo docker compose --env-file $WIKI_ENV_FILE up --pull always --force-recreate --detach'
                 }
             }
         }
@@ -51,9 +52,9 @@ pipeline {
                 }
             } 
             steps {
-                dir('fairwiki') {
+                dir('spark') {
                     sh 'sudo docker compose stop'
-                    sh 'sudo docker compose --env-file $ENV_FILE up --pull always --force-recreate --detach'
+                    sh 'sudo docker compose --env-file $SPARK_ENV_FILE up --pull always --force-recreate --detach'
                 }
             }
         }
