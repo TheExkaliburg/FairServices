@@ -10,7 +10,7 @@ services:
       - SPARK_USER=spark
     ports:
       - '10300:8080'
-      - '10301:6066'
+      - '6066:6066'
       - '7077:7077'
   worker:
     image: bitnami/spark:latest
@@ -22,5 +22,3 @@ services:
       - SPARK_WORKER_MEMORY=${WORKER_MEMORY:-16G}
       - SPARK_WORKER_CORES=${WORKER_CORES:-2}
       - SPARK_USER=spark
-    depends_on:
-      - master
