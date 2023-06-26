@@ -7,7 +7,7 @@ pipeline {
     }
     
     parameters {
-        booleanParam(description: 'Restarts the WikiJS Server even if there are no new changes', name: 'Restart WikiJS Server')
+        booleanParam(description: 'Restarts the WikiJS Server even if there are no new changes', name: 'WikiJS', defaultValue:'false')
     }
 
     environment {
@@ -15,19 +15,16 @@ pipeline {
     }
 
     stages {
-        /*
         stage('Git Checkout') {
-            
             steps {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/TheExkaliburg/FairServices.git'
             }
         }
-        */
         
         stage('FairWiki') {
             when { 
                 expression {
-                    params.'Restart WikiJS Server' || changeset('wikijs/*')
+                    params.WikiJS || changeset "wikijs/**"
                 }
             } 
             steps {
