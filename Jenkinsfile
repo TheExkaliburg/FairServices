@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+        githubPush()
+    }
+
     options {
         buildDiscarder(logRotator(numToKeepStr:'10', daysToKeepStr:'28', artifactNumToKeepStr:'5', artifactDaysToKeepStr:'14'))
         githubProjectProperty(displayName: 'FairServices', projectUrlStr: 'https://github.com/TheExkaliburg/FairServices.git/')

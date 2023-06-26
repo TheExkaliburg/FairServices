@@ -35,3 +35,7 @@ volumes:
   postgres_data:
   wiki_data:
   wiki_config:
+
+networks:
+  default:
+    driver: 'bridge'
