@@ -2,6 +2,7 @@ version: "2.1"
 services:
   wikijs:
     image: requarks/wiki
+    restart: always
     environment:
       - DB_TYPE=postgres
       - DB_HOST=postgres
@@ -14,11 +15,11 @@ services:
       - wiki_data:/data
     ports:
       - "10200:3000"
-    restart: always
     depends_on:
       - postgres
   postgres:
     image: postgres:latest
+    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -27,7 +28,6 @@ services:
       - "10201:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    restart: always
 
 volumes:
   postgres_data:

@@ -23,8 +23,9 @@ pipeline {
         
         stage('FairWiki') {
             when { 
-                expression {
-                    params.WikiJS || changeset "wikijs/**"
+                anyOf {
+                    expression { params.WikiJS }
+                    changeset 'wikijs/**'
                 }
             } 
             steps {
