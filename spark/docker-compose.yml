@@ -11,7 +11,7 @@ services:
     ports:
       - '10300:8080'
       - '10301:6066'
-      - '10302:7077'
+      - '7077:7077'
   spark-worker:
     image: bitnami/spark:latest
     environment:
