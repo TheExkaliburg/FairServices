@@ -15,21 +15,23 @@ pipeline {
     }
 
     stages {
+        /*
         stage('Git Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/TheExkaliburg/FairServices.git'
             }
         }
+        */
         
         stage('FairWiki') {
             when { 
                 anyOf {
                     expression { params.WikiJS }
-                    changeset 'wikijs/**'
+                    changeset 'fairwiki/**'
                 }
             } 
             steps {
-                dir('wikijs') {
+                dir('fairwiki') {
                     sh 'sudo docker compose stop'
                     sh 'sudo docker compose --env-file $ENV_FILE up --pull always --force-recreate --detach'
                 }
