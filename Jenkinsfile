@@ -54,7 +54,7 @@ pipeline {
             steps {
                 dir('spark') {
                     sh 'sudo docker compose stop'
-                    sh 'sudo docker compose --env-file $SPARK_ENV_FILE up --pull always --force-recreate --detach'
+                    sh 'sudo docker compose --env-file $SPARK_ENV_FILE up --pull always --force-recreate --detach --scale worker=2'
                 }
             }
         }
