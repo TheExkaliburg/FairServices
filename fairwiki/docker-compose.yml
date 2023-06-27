@@ -15,8 +15,9 @@ services:
     ports:
       - "10200:3000"
     volumes:
-      - wiki_config:/config
-      - wiki_data:/data
+      - wiki_data:/wiki/data/content
+    #  - ./favicons:/wiki/assets/favicons
+    #  - ./favicons/favicon.ico:/wiki/assets/favicon.ico
     
     
   postgres:
@@ -34,7 +35,6 @@ services:
 volumes:
   postgres_data:
   wiki_data:
-  wiki_config:
 
 networks:
   default:
