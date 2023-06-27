@@ -30,5 +30,5 @@ services:
       - SPARK_WORKER_MEMORY=${WORKER_MEMORY:-8G}
       - SPARK_WORKER_CORES=${WORKER_CORES:-2}
       - SPARK_USER=spark
-    ports:
-      - '10301-10309:8081'
+    #ports:
+    #  - '10301-10309:8081'
